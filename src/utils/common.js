@@ -1,7 +1,7 @@
 import isObjectLike from 'lodash/isObjectLike';
 import warning from './warning.js';
 
-export const NODE_ENV = typeof process !== 'undefined' ? process.env.NODE_ENV : 'development';
+export const NODE_ENV = 'production';
 
 export const isSyncReducer = reducer => {
     return isObjectLike(reducer);

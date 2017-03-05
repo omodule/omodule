@@ -1,9 +1,0 @@
-{
-    "global": "./src/omodules.global.js",
-    "folder": "./src/omodules",
-    "template": {
-        "default": "./.omodule"
-    },
-    "rootOmodule": "SELF",
-    "subOmodule": "INHERIT"
-}

@@ -30,7 +30,9 @@ const combineAsyncRoutes = (arrayRoutes = []) => (partialNextState, callback) =>
 
             isDone = ++doneCount === length;
 
-            if (isDone) callback(null, values);
+            if (isDone) {
+                callback(null, values);
+            }
         }
     }
 
@@ -83,27 +85,43 @@ const routeCombine = (omodule, store, parentHook) => {
 
                 const childSyncRoutes = childRoutes.filter(isSyncRoute);
 
-                const childLazyReducers = childReducers.filter(isLazyReducer).reduce((acc, reducer) => {
+                const childLazyReducers = childReducers.filter(isLazyReducer).reduce((
+                    acc,
+                    reducer
+                ) => {
                     return { ...acc, ...reducer };
                 }, {});
 
                 const work = (routeObj, childAsyncRoutes, childSyncRoutes, childLazyReducers) => {
                     if (childAsyncRoutes.length > 0) {
-                        if (routeObj.getChildRoutes) {
-                            childAsyncRoutes.unshift(routeObj.getChildRoutes);
+                        const originGetChildRoutes = routeObj.__omodule_getChildRoutes ||
+                            routeObj.getChildRoutes ||
+                            [];
+                        routeObj.__omodule_getChildRoutes = originGetChildRoutes;
+                        if (routeObj.__omodule_getChildRoutes.length > 0) {
+                            routeObj.getChildRoutes = combineAsyncRoutes([
+                                routeObj.__omodule_getChildRoutes,
+                                ...childAsyncRoutes
+                            ]);
+                        } else {
+                            routeObj.getChildRoutes = combineAsyncRoutes(childAsyncRoutes);
                         }
-                        routeObj.getChildRoutes = combineAsyncRoutes(childAsyncRoutes);
                     }
 
                     if (childSyncRoutes.length > 0) {
-                        routeObj.childRoutes = routeObj.childRoutes || [];
-                        routeObj.childRoutes = [...routeObj.childRoutes, ...childSyncRoutes];
+                        routeObj.__omodule_childRoutes = routeObj.__omodule_childRoutes ||
+                            routeObj.childRoutes ||
+                            [];
+                        routeObj.childRoutes = [
+                            ...routeObj.__omodule_childRoutes,
+                            ...childSyncRoutes
+                        ];
                     }
 
                     let lazyReducer = {};
 
-                    if (isLazyReducer(route.reducer)) {
-                        lazyReducer = { ...route.reducer, ...childLazyReducers };
+                    if (isLazyReducer(routeObj.reducer)) {
+                        lazyReducer = { ...routeObj.reducer, ...childLazyReducers };
                     } else {
                         lazyReducer = childLazyReducers;
                     }
@@ -116,17 +134,26 @@ const routeCombine = (omodule, store, parentHook) => {
                 };
 
                 if (isAsyncRoute(route)) {
-                    const wrapRouteCB = (error, routeObj) => {
-                        if (error) {
-                            route(error, routeObj);
-                        } else {
-                            route(
-                                null,
-                                work(routeObj, childAsyncRoutes, childSyncRoutes, childLazyReducers)
-                            );
-                        }
+                    const originRoute = route.__omodule_originRoute || route;
+                    const wrapRouteCB = (partialNextState, callback) => {
+                        originRoute(partialNextState, (error, routeObj) => {
+                            if (error) {
+                                callback(error, routeObj);
+                            } else {
+                                callback(
+                                    null,
+                                    work(
+                                        routeObj,
+                                        childAsyncRoutes,
+                                        childSyncRoutes,
+                                        childLazyReducers
+                                    )
+                                );
+                            }
+                        });
                     };
                     route = wrapRouteCB;
+                    route.__omodule_originRoute = originRoute;
                 } else if (isSyncRoute(route)) {
                     route = work(route, childAsyncRoutes, childSyncRoutes, childLazyReducers);
                 }
@@ -135,8 +162,8 @@ const routeCombine = (omodule, store, parentHook) => {
             }
         };
 
-        childOmodules.forEach((omodule, index) => {
-            routeCombine(omodule, store, hook(index));
+        childOmodules.forEach((childOmodule, index) => {
+            routeCombine(childOmodule, store, hook(index));
         });
     } else if (route) {
         parentHook(null, route, null);
