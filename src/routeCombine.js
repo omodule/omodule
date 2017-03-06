@@ -134,28 +134,48 @@ const routeCombine = (omodule, store, parentHook) => {
                 };
 
                 if (isAsyncRoute(route)) {
-                    const originRoute = route.__omodule_originRoute || route;
-                    const wrapRouteCB = (partialNextState, callback) => {
-                        originRoute(partialNextState, (error, routeObj) => {
-                            if (error) {
-                                callback(error, routeObj);
-                            } else {
-                                callback(
-                                    null,
-                                    work(
-                                        routeObj,
-                                        childAsyncRoutes,
-                                        childSyncRoutes,
-                                        childLazyReducers
-                                    )
-                                );
-                            }
-                        });
-                    };
+                    const originRoute = route;
+                    const wrapRouteCB = (() => {
+                        let isDown = false;
+                        if (isDown) {
+                            return route;
+                        } else {
+                            isDown = true;
+                            return (partialNextState, callback) => {
+                                originRoute(partialNextState, (error, routeObj) => {
+                                    if (error) {
+                                        callback(error, routeObj);
+                                    } else {
+                                        callback(
+                                            null,
+                                            work(
+                                                routeObj,
+                                                childAsyncRoutes,
+                                                childSyncRoutes,
+                                                childLazyReducers
+                                            )
+                                        );
+                                    }
+                                });
+                            };
+                        }
+                    })();
                     route = wrapRouteCB;
-                    route.__omodule_originRoute = originRoute;
                 } else if (isSyncRoute(route)) {
-                    route = work(route, childAsyncRoutes, childSyncRoutes, childLazyReducers);
+                    route = (() => {
+                        let isDown = false;
+                        if (isDown) {
+                            return route;
+                        } else {
+                            isDown = true;
+                            return work(
+                                route,
+                                childAsyncRoutes,
+                                childSyncRoutes,
+                                childLazyReducers
+                            );
+                        }
+                    })();
                 }
 
                 parentHook(null, route, null);
@@ -166,6 +186,32 @@ const routeCombine = (omodule, store, parentHook) => {
             routeCombine(childOmodule, store, hook(index));
         });
     } else if (route) {
+        route = (() => {
+            let isDown = false;
+            if (isDown) {
+                return route;
+            } else {
+                if (isLazyReducer(reducer)) {
+                    if (isSyncRoute(route)) {
+                        return attach(route, store, reducer);
+                    } else if (isAsyncRoute(route)) {
+                        const originRoute = route;
+                        return (partialNextState, callback) => {
+                            originRoute(partialNextState, (error, routeObj) => {
+                                if (error) {
+                                    callback(error, routeObj);
+                                } else {
+                                    callback(error, attach(routeObj, store, reducer));
+                                }
+                            })
+                        }
+
+                    }
+                }
+                return route;
+            }
+        })();
+
         parentHook(null, route, null);
     } else if (isLazyReducer(reducer) && !route) {
         parentHook(null, null, reducer);

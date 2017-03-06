@@ -2,7 +2,7 @@ import 'babel-polyfill'
 import { omoduleEnhencer } from 'omodule'
 import extractSyncReducer from '../../../src/extractSyncReducer'
 import extractRoute from '../../../src/extractRoute'
-import omodule from './app/omodule'
+import omodule from './omodule'
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
 import { createStore, compose, combineReducers, applyMiddleware } from 'redux';
 import { render } from 'react-dom'
@@ -12,19 +12,16 @@ import { Router } from 'react-router'
 import React from 'react'
 import createLogger from 'redux-logger';
 
-
-
 const syncReducer = extractSyncReducer(omodule)
-console.log(syncReducer);
-const rootReducer = combineReducers({
+const rootReducers = {
     routing: routerReducer,
     ...syncReducer
-})
+}
 
 const store = createStore(
-    rootReducer,
+    combineReducers(rootReducers),
     {},
-    compose(applyMiddleware(createLogger()), omoduleEnhencer(rootReducer))
+    compose(applyMiddleware(createLogger()), omoduleEnhencer(rootReducers))
 );
 
 const syncHistory = syncHistoryWithStore(hashHistory, store);
