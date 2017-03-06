@@ -94,28 +94,50 @@ const routeCombine = (omodule, store, parentHook) => {
 
                 const work = (routeObj, childAsyncRoutes, childSyncRoutes, childLazyReducers) => {
                     if (childAsyncRoutes.length > 0) {
-                        const originGetChildRoutes = routeObj.__omodule_getChildRoutes ||
-                            routeObj.getChildRoutes ||
-                            [];
-                        routeObj.__omodule_getChildRoutes = originGetChildRoutes;
-                        if (routeObj.__omodule_getChildRoutes.length > 0) {
-                            routeObj.getChildRoutes = combineAsyncRoutes([
-                                routeObj.__omodule_getChildRoutes,
-                                ...childAsyncRoutes
-                            ]);
-                        } else {
-                            routeObj.getChildRoutes = combineAsyncRoutes(childAsyncRoutes);
+                        if (!routeObj.hasBuildGetChildRoutes) {
+
+                            // change routeObj.childRoutes and childSyncRoutes to `function`
+                            // if a route has routeObj.childRoutes, routeObj.getChildRoutes will be no work.
+                            const syncRoutes = [
+                                ...(routeObj.childRoutes || []),
+                                ...childSyncRoutes
+                            ].reduce(
+                                (acc, route) => {
+                                    const f = (partialNextState, cb) => {
+                                        cb(null, route);
+                                    };
+                                    return [...acc, f];
+                                },
+                                []
+                            );
+                            delete routeObj.childRoutes
+
+                            routeObj.hasBuildChildRoutes = true;
+
+                            if (routeObj.getChildRoutes) {
+                                routeObj.getChildRoutes = combineAsyncRoutes([
+                                    routeObj.getChildRoutes,
+                                    ...syncRoutes,
+                                    ...childAsyncRoutes
+                                ]);
+                            } else {
+                                routeObj.getChildRoutes = combineAsyncRoutes([
+                                    ...syncRoutes,
+                                    ...childAsyncRoutes
+                                ]);
+                            }
+                            routeObj.hasBuildGetChildRoutes = true;
                         }
                     }
 
                     if (childSyncRoutes.length > 0) {
-                        routeObj.__omodule_childRoutes = routeObj.__omodule_childRoutes ||
-                            routeObj.childRoutes ||
-                            [];
-                        routeObj.childRoutes = [
-                            ...routeObj.__omodule_childRoutes,
-                            ...childSyncRoutes
-                        ];
+                        if (!routeObj.hasBuildChildRoutes) {
+                            routeObj.childRoutes = [
+                                ...(routeObj.childRoutes || []),
+                                ...childSyncRoutes
+                            ];
+                            routeObj.hasBuildChildRoutes = true;
+                        }
                     }
 
                     let lazyReducer = {};
@@ -203,9 +225,8 @@ const routeCombine = (omodule, store, parentHook) => {
                                 } else {
                                     callback(error, attach(routeObj, store, reducer));
                                 }
-                            })
-                        }
-
+                            });
+                        };
                     }
                 }
                 return route;

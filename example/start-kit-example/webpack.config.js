@@ -9,6 +9,7 @@ const config = {
         path: path.resolve(__dirname, './dist'),
         filename: '[name].[chunkhash].js'
     },
+    cache: false,
     module: {
         rules: [
             {
