@@ -1,6 +1,7 @@
 export const namespace = __omodule_namespace;
 const childnames = __omodule_childnames;
 console.log(childnames);
+console.log(__omodule_namespace);
 
 const omodule = {
     reducer: cb => {

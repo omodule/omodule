@@ -11,8 +11,8 @@ const initRoute = {
     path: '/'
 };
 
-const combineAsyncRoutes = (arrayRoutes = []) => (partialNextState, callback) => {
-    var length = arrayRoutes.length;
+const combineAsync = (array = []) => (partialNextState, callback) => {
+    var length = array.length;
     var values = [];
 
     if (length === 0) return callback(null, values);
@@ -36,7 +36,7 @@ const combineAsyncRoutes = (arrayRoutes = []) => (partialNextState, callback) =>
         }
     }
 
-    arrayRoutes.forEach(function(routeFun, index) {
+    array.forEach(function(routeFun, index) {
         routeFun(partialNextState, (error, route) => {
             done(index, error, route);
         });
@@ -85,12 +85,7 @@ const routeCombine = (omodule, store, parentHook) => {
 
                 const childSyncRoutes = childRoutes.filter(isSyncRoute);
 
-                const childLazyReducers = childReducers.filter(isLazyReducer).reduce((
-                    acc,
-                    reducer
-                ) => {
-                    return { ...acc, ...reducer };
-                }, {});
+                const childLazyReducers = childReducers.filter(isLazyReducer)
 
                 const work = (routeObj, childAsyncRoutes, childSyncRoutes, childLazyReducers) => {
                     if (childAsyncRoutes.length > 0) {
@@ -115,13 +110,13 @@ const routeCombine = (omodule, store, parentHook) => {
                             routeObj.hasBuildChildRoutes = true;
 
                             if (routeObj.getChildRoutes) {
-                                routeObj.getChildRoutes = combineAsyncRoutes([
+                                routeObj.getChildRoutes = combineAsync([
                                     routeObj.getChildRoutes,
                                     ...syncRoutes,
                                     ...childAsyncRoutes
                                 ]);
                             } else {
-                                routeObj.getChildRoutes = combineAsyncRoutes([
+                                routeObj.getChildRoutes = combineAsync([
                                     ...syncRoutes,
                                     ...childAsyncRoutes
                                 ]);
@@ -140,16 +135,16 @@ const routeCombine = (omodule, store, parentHook) => {
                         }
                     }
 
-                    let lazyReducer = {};
+                    let lazyReducers = [];
 
-                    if (isLazyReducer(routeObj.reducer)) {
-                        lazyReducer = { ...routeObj.reducer, ...childLazyReducers };
+                    if (isLazyReducer(reducer)) {
+                        lazyReducers = [ reducer, ...childLazyReducers ];
                     } else {
-                        lazyReducer = childLazyReducers;
+                        lazyReducers = childLazyReducers;
                     }
 
-                    if (Object.keys(lazyReducer) > 0) {
-                        routeObj = attach(routeObj, store, lazyReducer);
+                    if (lazyReducers.length > 0) {
+                        routeObj = attach(routeObj, store, combineAsync(lazyReducers));
                     }
 
                     return routeObj;

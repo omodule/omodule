@@ -23,6 +23,7 @@ const store = createStore(
     {},
     compose(applyMiddleware(createLogger()), omoduleEnhencer(rootReducers))
 );
+window.store = store
 
 const syncHistory = syncHistoryWithStore(hashHistory, store);
 

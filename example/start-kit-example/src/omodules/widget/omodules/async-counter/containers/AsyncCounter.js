@@ -7,7 +7,7 @@ import { hashHistory } from 'react-router';
 
 const LazyCounter = props => {
     return (
-        <div>
+        <div style={{ backgroundColor: '#8be36c' }}>
             LazyCounter
             result: {props.syncCounter}
             <div onClick={props.increase}>+</div>
