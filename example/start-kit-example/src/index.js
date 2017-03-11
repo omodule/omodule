@@ -1,5 +1,5 @@
 import 'babel-polyfill'
-import { omoduleEnhencer } from 'omodule'
+import { omoduleEnhancer } from 'omodule'
 import extractSyncReducer from '../../../src/extractSyncReducer'
 import extractRoute from '../../../src/extractRoute'
 import omodule from './omodule'
@@ -21,7 +21,7 @@ const rootReducers = {
 const store = createStore(
     combineReducers(rootReducers),
     {},
-    compose(applyMiddleware(createLogger()), omoduleEnhencer(rootReducers))
+    compose(applyMiddleware(createLogger()), omoduleEnhancer(rootReducers))
 );
 window.store = store
 
