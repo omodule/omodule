@@ -1,6 +1,6 @@
 {
   "name": "omodule",
-  "version": "0.0.5",
+  "version": "0.1.0",
   "description": "",
   "main": "lib/index.js",
   "scripts": {
@@ -32,7 +32,7 @@
     "webpack": "^2.2.1"
   },
   "dependencies": {
-    "lazy-reducer": "0.0.7",
+    "lazy-reducer": "0.1.0",
     "lodash": "^4.17.4"
   },
   "files": [
