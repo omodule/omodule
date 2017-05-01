@@ -64,7 +64,6 @@ export default function({ types: t }) {
         visitor: {
             Identifier(path, state) {
                 if (this.done === true) {
-                    path.stop();
                     return;
                 }
                 if (path.node.name === OMODULE && !t.isFunctionDeclaration(path.parent)) {
