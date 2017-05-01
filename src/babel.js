@@ -63,11 +63,11 @@ export default function({ types: t }) {
     return {
         visitor: {
             Identifier(path, state) {
-                if (this.done === true) {
+                if (this.__omodule_done === true) {
                     return;
                 }
                 if (path.node.name === OMODULE && !t.isFunctionDeclaration(path.parent)) {
-                    this.done = true;
+                    this.__omodule_done = true;
                     const program = path.findParent(path => path.isProgram());
                     program.unshiftContainer(
                         'body',
