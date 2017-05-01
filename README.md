@@ -1,5 +1,12 @@
 # omodule
 
-only leaf omodule can have no route.
+`omodule` is a path based information object.
 
-<img width="600px" src="./docs/images/omodule.png" />
+### API
+```javascript
+// omodule info object
+omodule = {
+    name, // name of omodule
+    namespace, // namespace of omodule
+    filePath
+}

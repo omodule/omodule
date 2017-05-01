@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin') // eslint-disable-line 
 
 const config = {
     devtool: 'source-map', // 调试js用这个
-    entry: './src/index.js',
+    entry: './root/joint.js',
     output: {
         path: path.resolve(__dirname, './dist'),
         filename: '[name].[chunkhash].js'
