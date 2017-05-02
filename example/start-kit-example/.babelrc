@@ -1,4 +1,11 @@
 {
-    "presets": ["es2015"],
-    "plugins": ["../../lib/babel"]
+    "presets": [
+      [
+        "es2015",
+        {
+          "modules": false
+        }
+      ]
+    ],
+    "plugins": ["../../lib/babel", "omodule-joint"]
 }

@@ -22,5 +22,8 @@
     "jest": "^19.0.2",
     "rimraf": "^2.6.1",
     "webpack": "^2.4.1"
+  },
+  "dependencies": {
+    "omodule-joint": "0.0.6"
   }
 }
