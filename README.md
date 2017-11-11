@@ -1,5 +1,8 @@
+<img src='./logo.png' />  
+
 # omodule
-`omodule` 是一种帮助开发者更好的管理 Web 项目模块的文件目录管理规范。在代码文件编译阶段对 omodule 作用域变量进行编译赋值。
+`omodule` 是一种帮助开发者更好的管理 Web 项目模块的文件目录管理规范。在代码文件编译阶段对 omodule 作用域变量进行编译赋值。  
+
 
 ## 1. omodule 规范下的文件目录结构 🌲
 目录例子： [./omodule-structure-example](./omodule-structure-example)
