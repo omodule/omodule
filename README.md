@@ -27,7 +27,7 @@
 ## 2. omodule 作用域变量
 
 #### __onamespace
-- &lt;string&gt;
+- `<string>`
 
 当前 omodule 的命名空间（基于根节点）  
 
@@ -39,7 +39,7 @@ console.log(__onamespace);
 ```
 
 #### __oname
-- &lt;string&gt;
+- `<string>`
 
 当前 omodule 的名称
 
@@ -50,7 +50,7 @@ console.log(__oname);
 ```
 
 #### __ofile
-- &lt;string&gt;
+- `<string>`
 
 当前文件名
 
@@ -62,7 +62,7 @@ console.log(__ofile);
 ```
 
 #### __ofilepath
-- &lt;string&gt;
+- `<string>`
 
 基于 omodule 根节点的文件路径
 
