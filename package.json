@@ -2,12 +2,6 @@
   "name": "omodule",
   "version": "0.2.0",
   "description": "",
-  "main": "lib/babel.js",
-  "scripts": {
-    "test": "jest",
-    "build": "babel src -d lib -w",
-    "prepublish": "rimraf lib && babel src -d lib"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/wuchangming/omodule.git"
@@ -17,17 +11,5 @@
   "bugs": {
     "url": "https://github.com/wuchangming/omodule/issues"
   },
-  "homepage": "https://github.com/wuchangming/omodule#readme",
-  "devDependencies": {
-    "babel-cli": "^6.24.1",
-    "babel-plugin-transform-object-rest-spread": "^6.23.0",
-    "babel-preset-es2015": "^6.24.1",
-    "jest": "^19.0.2",
-    "rimraf": "^2.6.1"
-  },
-  "files": [
-    "lib",
-    "src",
-    "example"
-  ]
+  "homepage": "https://github.com/wuchangming/omodule#readme"
 }
