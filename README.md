@@ -1,7 +1,7 @@
 # omodule
 `omodule` 是一种帮助开发者更好的管理 Web 项目模块的文件目录管理规范。在代码文件编译阶段对 omodule 作用域变量进行编译赋值。
 
-## 1. omodule 规范下的文件目录结构🌲
+## 1. omodule 规范下的文件目录结构 🌲
 目录例子： [./omodule-structure-example](./omodule-structure-example)
 ```
 .  
@@ -32,7 +32,8 @@
 当前 omodule 的命名空间（基于根节点）  
 
 例子：root-path/omodules/a/omodules/a-sub1/example.a-sub1.js
-```
+
+```javascript
 console.log(__onamespace);
 // Prints: /a/a-sub1
 ```
@@ -43,7 +44,7 @@ console.log(__onamespace);
 当前 omodule 的名称
 
 例子：root-path/omodules/a/omodules/a-sub1/example.a-sub1.js
-```
+```javascript
 console.log(__oname);
 // Prints: a-sub1
 ```
@@ -55,7 +56,7 @@ console.log(__oname);
 
 例子：root-path/omodules/a/omodules/a-sub1/example.a-sub1.js
 
-```
+```javascript
 console.log(__ofile);
 // Prints: example.a-sub1.js
 ```
@@ -67,7 +68,7 @@ console.log(__ofile);
 
 例子：root-path/omodules/a/omodules/a-sub1/example.a-sub1.js
 
-```
+```javascript
 console.log(__ofilepath);
 // Prints: /omodules/a/omodules/example.a-sub1.js
 ```
