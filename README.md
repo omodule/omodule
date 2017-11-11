@@ -31,7 +31,7 @@
 
 当前 omodule 的命名空间（基于根节点）  
 
-例子：root-path/omodules/a/omodules/a-sub1/example.a-sub1.js
+例子：`root-path/omodules/a/omodules/a-sub1/example.a-sub1.js`
 
 ```javascript
 console.log(__onamespace);
@@ -43,7 +43,7 @@ console.log(__onamespace);
 
 当前 omodule 的名称
 
-例子：root-path/omodules/a/omodules/a-sub1/example.a-sub1.js
+例子：`root-path/omodules/a/omodules/a-sub1/example.a-sub1.js`
 ```javascript
 console.log(__oname);
 // Prints: a-sub1
@@ -54,7 +54,7 @@ console.log(__oname);
 
 当前文件名
 
-例子：root-path/omodules/a/omodules/a-sub1/example.a-sub1.js
+例子：`root-path/omodules/a/omodules/a-sub1/example.a-sub1.js`
 
 ```javascript
 console.log(__ofile);
@@ -66,7 +66,7 @@ console.log(__ofile);
 
 基于 omodule 根节点的文件路径
 
-例子：root-path/omodules/a/omodules/a-sub1/example.a-sub1.js
+例子：`root-path/omodules/a/omodules/a-sub1/example.a-sub1.js`
 
 ```javascript
 console.log(__ofilepath);
