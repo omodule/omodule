@@ -54,18 +54,6 @@ console.log(__oname);
 // Prints: a-sub1
 ```
 
-#### __ofile
-- `<string>`
-
-当前文件名
-
-例子：`root-path/omodules/a/omodules/a-sub1/example.a-sub1.js`
-
-```javascript
-console.log(__ofile);
-// Prints: example.a-sub1.js
-```
-
 #### __ofilepath
 - `<string>`
 
