@@ -25,7 +25,7 @@ root
 路径：[root/omodules/account/omodules/login/loginPage.js](./omodule-structure-example/root/omodules/account/omodules/login/loginPage.js)
 
 ```javascript
-console.log(__onamespace); // 打印日志: /account/login
+console.log(__onamespace); // 打印log: /account/login
 ```
 
 #### __oname
@@ -33,7 +33,7 @@ console.log(__onamespace); // 打印日志: /account/login
 
 路径：[root/omodules/account/omodules/register/registerPage.js](./omodule-structure-example/root/omodules/account/omodules/register/registerPage.js)
 ```javascript
-console.log(__oname); // 打印日志: register
+console.log(__oname); // 打印log: register
 ```
 
 #### __ofilepath
@@ -42,7 +42,7 @@ console.log(__oname); // 打印日志: register
 路径：[root/omodules/homepage/homePage.js](./omodule-structure-example/root/omodules/homepage/homePage.js)
 
 ```javascript
-console.log(__ofilepath); // 打印日志: omodules/homepage/homePage.js
+console.log(__ofilepath); // 打印log: omodules/homepage/homePage.js
 ```
 
 ## 关于 babel 插件
