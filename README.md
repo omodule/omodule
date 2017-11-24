@@ -5,7 +5,7 @@
 # omodule
 `omodule` 是一种简单实用的文件目录管理规范，帮助开发者更好的管理项目模块。目前可使用 [babel](https://babeljs.io) 插件  [babel-plugin-transform-omodule-scope](https://github.com/omodule/babel-plugin-transform-omodule-scope) 进行 omodule 作用域常量的代码编译。
 
-## 1. omodule 规范下的文件目录结构 🌲
+## omodule 规范下的文件目录结构 🌲
 例子： [./omodule-structure-example](./omodule-structure-example)
 ```
 root
@@ -17,7 +17,7 @@ root
     |__ homepage
     |__ order
 ```
-## 2. omodule 作用域常量
+## 三个 omodule 作用域常量的定义
 
 #### __onamespace
 - `当前 omodule 的命名空间（基于根节点）`
@@ -45,5 +45,5 @@ console.log(__oname); // Prints: register
 console.log(__ofilepath); // Prints: omodules/homepage/homePage.js
 ```
 
-## 2. babel 插件
+## 关于 babel 插件
 目前可配合 [babel-plugin-transform-omodule-scope](https://github.com/omodule/babel-plugin-transform-omodule-scope) 编译 omodule 作用域常量。
