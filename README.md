@@ -22,7 +22,7 @@ root
 #### __onamespace
 - `当前 omodule 的命名空间（基于根节点）`
 
-文件路径：`root/omodules/account/omodules/login/loginPage.js`
+路径：[root/omodules/account/omodules/login/loginPage.js](./omodule-structure-example/root/omodules/account/omodules/login/loginPage.js)
 
 ```javascript
 console.log(__onamespace); // Prints: /account/login
@@ -31,7 +31,7 @@ console.log(__onamespace); // Prints: /account/login
 #### __oname
 - `当前 omodule 的名称`
 
-文件路径：`root/omodules/account/omodules/register/registerPage.js`
+路径：[root/omodules/account/omodules/register/registerPage.js](./omodule-structure-example/root/omodules/account/omodules/register/registerPage.js)
 ```javascript
 console.log(__oname); // Prints: register
 ```
@@ -39,7 +39,7 @@ console.log(__oname); // Prints: register
 #### __ofilepath
 - `基于 omodule 根节点的文件路径`
 
-文件路径：`root/omodules/homepage/homePage.js`
+路径：[root/omodules/homepage/homePage.js](./omodule-structure-example/root/omodules/homepage/homePage.js)
 
 ```javascript
 console.log(__ofilepath); // Prints: omodules/homepage/homePage.js
