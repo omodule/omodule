@@ -19,10 +19,8 @@ root
 ```
 ## 2. omodule 作用域变量
 
-#### __onamespace
+#### __onamespace `当前 omodule 的命名空间（基于根节点）`
 - `<string>`
-
-当前 omodule 的命名空间（基于根节点）  
 
 文件路径：`root/omodules/account/omodules/login/loginPage.js`
 
@@ -30,20 +28,16 @@ root
 console.log(__onamespace); // Prints: /account/login
 ```
 
-#### __oname
+#### __oname `当前 omodule 的名称`
 - `<string>`
-
-当前 omodule 的名称
 
 文件路径：`root/omodules/account/omodules/register/registerPage.js`
 ```javascript
 console.log(__oname); // Prints: register
 ```
 
-#### __ofilepath
+#### __ofilepath `基于 omodule 根节点的文件路径`
 - `<string>`
-
-基于 omodule 根节点的文件路径
 
 文件路径：`root/omodules/homepage/homePage.js`
 
