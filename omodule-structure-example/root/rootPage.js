@@ -1,6 +1,6 @@
 console.log(__onamespace);
-// Prints: /b
+// Prints: /
 console.log(__oname);
-// Prints: b
+// Prints: root
 console.log(__ofilepath);
-// Prints: /omodules/b/example.b.js
+// Prints: rootPage.js
