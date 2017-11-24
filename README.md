@@ -27,8 +27,7 @@ root
 文件路径：`root/omodules/account/omodules/login/loginPage.js`
 
 ```javascript
-console.log(__onamespace);
-// Prints: /account/login
+console.log(__onamespace); // Prints: /account/login
 ```
 
 #### __oname
@@ -38,8 +37,7 @@ console.log(__onamespace);
 
 文件路径：`root/omodules/account/omodules/register/registerPage.js`
 ```javascript
-console.log(__oname);
-// Prints: register
+console.log(__oname); // Prints: register
 ```
 
 #### __ofilepath
@@ -50,8 +48,7 @@ console.log(__oname);
 文件路径：`root/omodules/homepage/homePage.js`
 
 ```javascript
-console.log(__ofilepath);
-// Prints: omodules/homepage/homePage.js
+console.log(__ofilepath); // Prints: omodules/homepage/homePage.js
 ```
 
 ## 2. babel 插件
