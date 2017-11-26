@@ -54,5 +54,5 @@ console.log(__oname); // 打印log: register
 console.log(__ofilepath); // 打印log: omodules/homepage/homePage.js
 ```
 
-## 关于 babel 插件
+## 关于 omodule babel 插件
 目前可配合 [babel-plugin-transform-omodule-scope](https://github.com/omodule/babel-plugin-transform-omodule-scope) 编译 omodule 作用域常量。
