@@ -26,7 +26,7 @@ root
     |__ homepage
     |__ order
 ```
-## 三个 omodule 作用域常量的定义
+## 两个 omodule 作用域常量的定义
 
 #### __onamespace
 - `当前 omodule 的命名空间（基于根节点）`
@@ -35,14 +35,6 @@ root
 
 ```javascript
 console.log(__onamespace); // 打印log: /account/login
-```
-
-#### __oname
-- `当前 omodule 的名称`
-
-路径：[root/omodules/account/omodules/register/registerPage.js](./omodule-structure-example/root/omodules/account/omodules/register/registerPage.js)
-```javascript
-console.log(__oname); // 打印log: register
 ```
 
 #### __ofilepath
