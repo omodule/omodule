@@ -3,16 +3,10 @@
 </p>
 
 # omodule
-`omodule` 是一种简单实用的文件目录管理规范，帮助开发者更好的管理项目模块。目前可使用 [babel](https://babeljs.io) 插件  [babel-plugin-transform-omodule-scope](https://github.com/omodule/babel-plugin-transform-omodule-scope) 进行 omodule 作用域常量的代码编译。
+`omodule` 是一种以项目目录结构为基础的「命名空间」规范。目前可使用 [babel](https://babeljs.io) 插件  [babel-plugin-transform-omodule-namespace](https://github.com/omodule/babel-plugin-transform-omodule-namespace) 进行 omodule 命名空间常量的代码编译。
 
-## 什么时候需要用到 omodule ？
-### 需要 ✅
-- 已有项目：迅速膨胀、业务模块快速增长，发现文件的管理混乱已经影响到开发效率。
-- 新项目：预感到将会包含大量业务模块，且面临频繁迭代。  
-
-### 不需要 ❌
-- 小项目、demo项目、一次性项目等。
-- 不知道未来会怎样的新项目。
+## Motivation ?
+javascript 的项目缺少命名空间规范。
 
 ## omodule 规范下的文件目录结构 🌲
 例子： [./omodule-structure-example](./omodule-structure-example)
@@ -26,7 +20,7 @@ root
     |__ homepage
     |__ order
 ```
-## 两个 omodule 作用域常量的定义
+## 两个 omodule 命名空间常量的定义
 
 #### __onamespace
 - `当前 omodule 的命名空间（基于根节点）`
@@ -38,7 +32,7 @@ console.log(__onamespace); // 打印log: /account/login
 ```
 
 #### __ofilepath
-- `基于 omodule 根节点的文件路径`
+- `基于 omodule 根节点的文件路径常量`
 
 路径：[root/omodules/homepage/homePage.js](./omodule-structure-example/root/omodules/homepage/homePage.js)
 
@@ -47,4 +41,4 @@ console.log(__ofilepath); // 打印log: omodules/homepage/homePage.js
 ```
 
 ## 关于 omodule babel 插件
-目前可配合 [babel-plugin-transform-omodule-scope](https://github.com/omodule/babel-plugin-transform-omodule-scope) 编译 omodule 作用域常量。
+目前可配合 [babel-plugin-transform-omodule-namespace](https://github.com/omodule/babel-plugin-transform-omodule-namespace) 编译 omodule 作用域常量。
